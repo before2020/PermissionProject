@@ -7,8 +7,8 @@
 </head>
 <body class="easyui-layout">
 <%--顶部--%>
-<div data-options="region:'north'" style="height:100px; background: #ec4e00; padding: 20px 20px">
-    <img src="static/images/main_logo.png" alt="">
+<div data-options="region:'north'" style="height:70px;background: #ec4e00;">
+    <img src="static/images/main_logo.png" alt="" style="height:60px;">
 </div>
 <%--底部--%>
 <div data-options="region:'south'" style="height:50px; border-bottom: 3px solid #ec4e00">

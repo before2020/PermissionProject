@@ -17,11 +17,10 @@ public class EmployeeController
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping("/employeeList")
+    @RequestMapping("/getEmployeeList")
     @ResponseBody
     public PageResult getEmployeeList(QueryPage qp)
     {
-        System.out.println("controller" + qp);
         return employeeService.getEmployeeList(qp);
     }
 

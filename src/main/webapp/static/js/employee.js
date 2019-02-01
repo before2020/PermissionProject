@@ -1,7 +1,7 @@
 $(function () {
     //员工数据列表
     $('#datagrid').datagrid({
-        url: '/employeeList',
+        url: '/getEmployeeList',
         toolbar: '#tb',
         columns: [[
             {field: 'username', title: '姓名', width: 100, align: 'center'},
@@ -13,7 +13,8 @@ $(function () {
                 formatter: function (value, row, index) {
                     if (value) return value.name;
                 }
-            }, {
+            },
+            {
                 field: 'state', title: '状态', width: 100, align: 'center',
                 formatter: function (value, row, index) {
                     if (row.state) return '在职';
@@ -44,7 +45,7 @@ $(function () {
     //对话框
     $('#dialog').dialog({
         width: 350,
-        height: 350,
+        height: 400,
         closed: true,
         modal: true,
         buttons: [
@@ -60,6 +61,12 @@ $(function () {
                     }
                     $('#employeeForm').form('submit', {
                         url: url,
+                        onSubmit: function(param) {
+                          var allRid = $('#role').combobox('getValues');
+                          for(i = 0; i < allRid.length; i++) {
+                              param['roles[' + i + '].rid'] = allRid[i];
+                          }
+                        },
                         success: function (data) {
                             data = $.parseJSON(data);
                             $.messager.alert('提示', data.msg);
@@ -80,7 +87,7 @@ $(function () {
     });
     //部门
     $('#department').combobox({
-        url: '/departmentList',
+        url: '/getDepartmentList',
         valueField: 'id',
         textField: 'name',
         width: 160,
@@ -96,6 +103,46 @@ $(function () {
             })
         }
     });
+    //在职/离职
+    $('#state').combobox({
+        valueField: 'value',
+        textField: 'label',
+        data: [{
+            value: true,
+            label: '在职'
+        }, {
+            value: false,
+            label: '离职'
+        }],
+        width: 160,
+        panelHeight: 'fit',
+        editable: false
+    });
+    //是否管理员
+    $('#admin').combobox({
+        valueField:'value',
+        textField:'label',
+        data:[{
+            value:true,
+            label:'是'
+        },{
+            value:false,
+            label:'否'
+        }],
+        width: 160,
+        panelHeight: 'fit',
+        editable: false
+    });
+    //角色
+    $('#role').combobox({
+        url: '/getRoleListNoPage',
+        valueField: 'rid',
+        textField: 'rname',
+        width: 160,
+        panelHeight: 'fit',
+        editable: false,
+        multiple: true
+    });
     //监听add
     $('#add').click(function () {
         $('#employeeForm').form('clear');
@@ -106,9 +153,9 @@ $(function () {
     });
     //监听edit
     $('#edit').click(function () {
+        $('#employeeForm').form('clear');
         //得到选中的条目
         var rowData = $('#datagrid').datagrid('getSelected');
-        console.log(rowData);
         if (!rowData) {
             $.messager.alert('提示', "未选中任何数据");
             return;
@@ -119,10 +166,21 @@ $(function () {
         $("[name='password']").validatebox({required: false});
         $('#dialog').dialog('open');
 
-        rowData['department.id'] = rowData.department.id;
-        rowData['state'] = rowData['state'] + '';
-        rowData['admin'] = rowData['admin'] + '';
+        //回显部门
+        if(rowData.department)
+            rowData['department.id'] = rowData.department.id;
+        //回显状态
+        rowData['state'] = rowData['state'];
+        //回显管理员
+        rowData['admin'] = rowData['admin'];
+
         $('#employeeForm').form('load', rowData);
+        //回显角色
+        $.get('/getRolesByEid?id=' + rowData.id, function (data) {
+            if(data)
+                $('#role').combobox('setValues', data);
+        });
+
     });
     //监听离职
     $('#delete').click(function () {

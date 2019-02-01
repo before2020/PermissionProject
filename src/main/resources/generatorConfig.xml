@@ -98,7 +98,7 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="department"></table>
+        <table tableName="permission"/>
 
     </context>
 </generatorConfiguration>

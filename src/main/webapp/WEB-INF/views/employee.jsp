@@ -46,25 +46,26 @@
         </tr>
         <tr>
             <td>部门</td>
-            <td><input name="department.id" type="text" id="department" placeholder="请选择部门"/></td>
+            <td>
+                <input name="department.id" type="text" id="department" placeholder="请选择部门"/>
+            </td>
         </tr>
         <tr>
             <td>状态</td>
             <td>
-                <select name="state" class="easyui-combobox" data-options="width:160,panelHeight:'fit',editable:false">
-                    <option value=true>在职</option>
-                    <option value=false>离职</option>
-                </select>
+                <input name="state" type="text" id="state">
             </td>
         </tr>
         <tr>
             <td>是否管理员</td>
             <td>
-                <select name="admin" class="easyui-combobox"
-                        data-options="value:false,width:160,panelHeight:'fit',editable:false">
-                    <option value=true>是</option>
-                    <option value=false>否</option>
-                </select>
+                <input type="text" name="admin" id="admin">
+            </td>
+        </tr>
+        <tr>
+            <td>选择角色</td>
+            <td>
+                <input name='role' type="text" id="role">
             </td>
         </tr>
     </table>
