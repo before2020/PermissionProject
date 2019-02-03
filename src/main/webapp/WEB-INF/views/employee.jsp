@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <html>
 <head>
     <title>Title</title>
@@ -8,10 +9,17 @@
 </head>
 <body>
 <div id="tb">
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" id="add">添加</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" id="edit">编辑</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" id="delete">离职</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" id="reload">刷新</a>
+    <%--用shiro控制标签显示--%>
+    <shiro:hasPermission name="employee:add">
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" id="add">添加</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="employee:edit">
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" id="edit">编辑</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="employee:delete">
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" id="delete">离职</a>
+    </shiro:hasPermission>
+
     <input name="searchbox" style="width:200px"/>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" id="searchbtn">搜索</a>
 
