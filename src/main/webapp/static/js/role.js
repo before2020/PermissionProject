@@ -1,7 +1,7 @@
 $(function () {
     //员工数据列表
     $('#role_datagrid').datagrid({
-        url: '/getRoleList',
+        url: 'getRoleList',
         toolbar: '#tb',
         columns: [[
             {field: 'rnum', title: '角色编号', width: 100, align: 'center'},
@@ -59,7 +59,7 @@ $(function () {
     $('#role_dg1').datagrid({
         title:'所有权限',
         height:400,
-        url:'/getPermissionList',
+        url:'getPermissionList',
         columns:[[
             {field:'pname',title:'权限名称',width:140, align:'center'}
         ]],
@@ -107,7 +107,7 @@ $(function () {
         $('#role_dg1').datagrid('clearSelections');
         //回显选中的数据
         $('#role_form').form('load', rowData);
-        $('#role_dg2').datagrid('load', '/getPermissionsByRid?rid=' + rowData.rid);
+        $('#role_dg2').datagrid('load', 'getPermissionsByRid?rid=' + rowData.rid);
     });
     
     $('#delete').click(function () {
@@ -118,7 +118,7 @@ $(function () {
         }
         $.messager.confirm('确认', '确定要删除该角色吗？', function (res) {
             if(res) {
-                $.get('/deleteRole?rid='+rowData.rid, function (data) {
+                $.get('deleteRole?rid='+rowData.rid, function (data) {
                     $.messager.alert('提示', data.msg);
                     $('#role_datagrid').datagrid('reload');
                 })

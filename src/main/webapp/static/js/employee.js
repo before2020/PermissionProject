@@ -1,7 +1,7 @@
 $(function () {
     //员工数据列表
     $('#datagrid').datagrid({
-        url: '/getEmployeeList',
+        url: 'getEmployeeList',
         toolbar: '#tb',
         columns: [[
             {field: 'username', title: '姓名', width: 100, align: 'center'},
@@ -55,9 +55,9 @@ $(function () {
                     var id = $("[name='id']").val();
                     var url = null;
                     if (id) {
-                        url = '/updateEmployee';
+                        url = 'updateEmployee';
                     } else {
-                        url = '/saveEmployee';
+                        url = 'saveEmployee';
                     }
                     $('#employeeForm').form('submit', {
                         url: url,
@@ -87,7 +87,7 @@ $(function () {
     });
     //部门
     $('#department').combobox({
-        url: '/getDepartmentList',
+        url: 'getDepartmentList',
         valueField: 'id',
         textField: 'name',
         width: 160,
@@ -135,7 +135,7 @@ $(function () {
     });
     //角色
     $('#role').combobox({
-        url: '/getRoleListNoPage',
+        url: 'getRoleListNoPage',
         valueField: 'rid',
         textField: 'rname',
         width: 160,
@@ -176,7 +176,7 @@ $(function () {
 
         $('#employeeForm').form('load', rowData);
         //回显角色
-        $.get('/getRolesByEid?id=' + rowData.id, function (data) {
+        $.get('getRolesByEid?id=' + rowData.id, function (data) {
             if(data)
                 $('#role').combobox('setValues', data);
         });
@@ -194,7 +194,7 @@ $(function () {
         }
         $.messager.confirm("确认", "确定要更改员工状态吗？", function (res) {
             if (res) {
-                $.get('/updateState?id=' + rowData.id, function (data) {
+                $.get('updateState?id=' + rowData.id, function (data) {
                     //get会自动把data解析，不用下一条语句了
                     //data = $.parseJSON(data);
                     $.messager.alert(data.msg);

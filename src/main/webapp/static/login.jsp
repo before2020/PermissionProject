@@ -29,7 +29,7 @@
                     <form>
                         <div class="lg-username input-item clearfix">
                             <i class="iconfont"></i>
-                            <input type="text" value="itlike" name="username" placeholder="请用户名">
+                            <input type="text" value="itlike" name="username" placeholder="请输入用户名">
                         </div>
                         <div class="lg-password input-item clearfix">
                             <i class="iconfont"></i>
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="enter">
-                            <a href="javascript:;" class="purchaser" id="loginBtn">点击登录</a>
+                            <a href="javascript:" class="purchaser" id="loginBtn">点击登录</a>
                         </div>
 
                     </form>

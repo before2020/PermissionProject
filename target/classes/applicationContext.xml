@@ -23,4 +23,17 @@
 
     <!--导入shiro-->
     <import resource="classpath:application-shiro.xml"/>
+
+    <!--AOP 日志-->
+    <bean id="systemAspect" class="com.abc.aspect.SystemAspect"/>
+
+    <aop:config>
+        <aop:pointcut id="servicePoint"
+                      expression="execution(* com.abc.service.*.*(..))"/>
+
+        <aop:aspect ref="systemAspect">
+            <aop:after method="writeLog" pointcut-ref="servicePoint"/>
+        </aop:aspect>
+
+    </aop:config>
 </beans>
